@@ -1,57 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
     <title>Underworld underground</title>
 
-    <link rel="stylesheet" type="text/css" href="vendors/bootstrap.min.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="vendors/bootstrap.min.css" />
+  </head>
 
-<body style="background-image: url(img/united-squares.png); color: #ffffff;">
-
+  <body style="background-image: url(img/united-squares.png); color: #ffffff">
     <div class="container">
-        <img src="img/taxi-driver.png" style="width: 150px; float:right; position:relative; left:65px; bottom: 50px;">
-        <div style="background-color: #651BA1; margin-top: 10%; border-radius: 5px; padding: 1% 5%;">
+      <img
+        src="img/taxi-driver.png"
+        style="
+          width: 150px;
+          float: right;
+          position: relative;
+          left: 65px;
+          bottom: 50px;
+        "
+      />
+      <div
+        style="
+          background-color: #651ba1;
+          margin-top: 10%;
+          border-radius: 5px;
+          padding: 1% 5%;
+        "
+      >
+        <h1 class="text-center">Hello, passeng... haem, you.</h1>
 
-            <h1 class="text-center"> Hello, passeng... haem, you.</h1>
+        <p style="margin-top: 2%">
+          <strong>Subway agent:</strong>
+          Well, I don't think I know you. Do I ? <br />
+          What are you doing in the cyber-security Underworld subway, anyway?
+          <br />
+          And do you even have a proper travel token, for a start?
+        </p>
 
-            <p style="margin-top: 2%;">
-                <strong>Subway agent:</strong>
-                Well, I don't think I know you. Do I ? <br>
-                What are you doing in the cyber-security Underworld subway, anyway? <br>
-                And do you even have a proper travel token, for a start?
-            </p>
-
-            <!-- XSS vulnerability
+        <!-- XSS vulnerability
+            <button onclick="alert('XSS')">Click me</button> 
 
                     Hack hint: typing <script>alert(1)</script> in the input field won't work, but
                     typing something like <img src=" " onerror="alert(1)"> will! -->
 
-            <input class="text-center" placeholder="Answer here." id="token-question" style="margin-bottom: 1%;">
+        <input
+          class="text-center"
+          placeholder="Answer here."
+          id="token-question"
+          style="margin-bottom: 1%"
+        />
 
-            <p><strong>You:</strong> Well, about my ticket... I <span id="token-answer"
-                    style="color: #f0c419"></span>...</p>
-
-        </div>
+        <p>
+          <strong>You:</strong> Well, about my ticket... I
+          <span id="token-answer" style="color: #f0c419"></span>...
+        </p>
+      </div>
     </div>
 
     <script>
+      const input = document.getElementById("token-question");
+      const log = document.getElementById("token-answer");
 
-        const input = document.getElementById("token-question");
-        const log = document.getElementById("token-answer");
+      input.addEventListener("input", updateValue);
 
-        input.addEventListener("input", updateValue);
+      // replace InnerHTML with InnerText to prevent XSS
 
-        function updateValue(e) {
-            log.innerHTML = e.target.value;
-        }
-
+      function updateValue(e) {
+        log.innerText = e.target.value;
+      }
     </script>
-
-</body>
-
+  </body>
 </html>
