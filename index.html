@@ -47,8 +47,27 @@
         input.addEventListener("input", updateValue);
 
         function updateValue(e) {
-            log.innerHTML = e.target.value;
+            log.innerHTML = security(e.target.value);
         }
+
+        function security(str) {
+              str = str + "''";
+              let out = "''";
+              for(let i=0; i<str.length; i++) {
+                  if(str[i] === '<') {
+                      out += '&lt;';
+                  } else if(str[i] === '>') {
+                      out += '&gt;';
+                  } else if(str[i] === "'") {
+                      out += '&#39;';
+                  } else if(str[i] === '"') {
+                      out += '&quot;';
+                  } else {
+                      out += str[i];
+                  }
+              }
+              return out;
+         }
 
     </script>
 
