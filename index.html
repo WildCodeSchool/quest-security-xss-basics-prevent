@@ -47,7 +47,21 @@
         input.addEventListener("input", updateValue);
 
         function updateValue(e) {
-            log.innerHTML = e.target.value;
+            log.textContent = escapeHTML(e.target.value);
+        }
+
+        // Function to escape HTML special characters
+        function escapeHTML(str) {
+            return str.replace(/[&<>"'\/]/g, function (s) {
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    "\"": "&quot;",
+                    "'": "&#39;",
+                    "/": "&#x2F;"
+                }[s];
+            });
         }
 
     </script>
