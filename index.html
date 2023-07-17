@@ -26,15 +26,17 @@
                 And do you even have a proper travel token, for a start?
             </p>
 
-            <!-- XSS vulnerability
+<!-- XSS vulnerability
+        Hack hint: typing &lt;script&gt;alert(1)&lt;/script&gt; in the input field won't work, but
+        typing something like &lt;img src="" onerror="alert(1)"&gt; will!
+    
+    1er code : <img src=" " onerror="alert(1)">
+    2ème code : &lt;img src=&quot;&quot; onerror=&quot;alert(1)&quot;&gt;
+-->
 
-                    Hack hint: typing <script>alert(1)</script> in the input field won't work, but
-                    typing something like <img src=" " onerror="alert(1)"> will! -->
+        <input class="text-center" placeholder="Answer here." id="token-question" style="margin-bottom: 1%;">
 
-            <input class="text-center" placeholder="Answer here." id="token-question" style="margin-bottom: 1%;">
 
-            <p><strong>You:</strong> Well, about my ticket... I <span id="token-answer"
-                    style="color: #f0c419"></span>...</p>
 
         </div>
     </div>
